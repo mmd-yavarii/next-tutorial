@@ -7,8 +7,8 @@ export default function Btn({ value, handler, themColorBtn }) {
         color: themColorBtn ? "#fff" : "#000",
         fontWeight: "bold",
         fontSize: "1.1rem",
-        width: "4em",
-        height: "4em",
+        width: "3.7em",
+        height: "3.7em",
         borderRadius: "50px",
     };
     return (
