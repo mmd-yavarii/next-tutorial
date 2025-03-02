@@ -1,48 +1,23 @@
-import Btn from "./Btns.jsx";
-import { useState } from "react";
-import { btns, displayStyle, btnContainerStyle } from "./helper.js";
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import ProductsPage from './pages/ProductPage';
+import Cart from './pages/Cart';
+import PageNottFound from './pages/404';
+import ProductsDetails from './pages/ProductsDetails';
 
 function App() {
-    const [display, setDisplay] = useState("0");
-
-    // add btn value on the screen
-    const btnHandler = (event) => {
-        const value = event.target.innerText;
-
-        if (display === "0") {
-            setDisplay(value);
-        } else {
-            setDisplay(display + value);
-        }
-    };
-
-    // remove btn value on the screen
-    const backSpace = () => {
-        if (display.length > 1) {
-            setDisplay(display.slice(0, -1));
-        } else {
-            setDisplay("0");
-        }
-    };
-
-    // equal handler
-    const equalhandler = () => {
-        setDisplay(eval(display));
-    };
-
     return (
         <>
-            {/* display */}
-            <div style={displayStyle} onClick={backSpace}>
-                <h1>{display}</h1>
-            </div>
-
-            {/* buttons */}
-            <div style={btnContainerStyle}>
-                {btns.map((item) => (
-                    <Btn value={item.value} handler={item.value != "=" ? btnHandler : equalhandler} themColorBtn={item.themColorBtn} key={item.id} />
-                ))}
-            </div>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/products" element={<ProductsPage />} />
+                    <Route path="/products/:id" element={<ProductsDetails />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/*" element={<PageNottFound />} />
+                </Routes>
+            </Layout>
         </>
     );
 }

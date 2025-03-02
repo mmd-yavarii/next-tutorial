@@ -1,0 +1,26 @@
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #000;
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+.active {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 0.4em;
+    border-radius: 10px;
+}
