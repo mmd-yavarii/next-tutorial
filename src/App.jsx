@@ -1,23 +1,24 @@
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
-import ProductsPage from './pages/ProductPage';
-import Cart from './pages/Cart';
-import PageNottFound from './pages/404';
-import ProductsDetails from './pages/ProductsDetails';
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import ProductsPage from "./pages/ProductsPage";
+import DetailesPage from "./pages/DetailesPage";
+import Checkout from "./pages/Checkout";
+import PageNotFound from "./pages/404";
+import ProductProvider from "./context/ProductProvider";
 
 function App() {
     return (
         <>
-            <Layout>
+            <ProductProvider>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route index element={<Navigate to="/products" replace={true} />} />
                     <Route path="/products" element={<ProductsPage />} />
-                    <Route path="/products/:id" element={<ProductsDetails />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/*" element={<PageNottFound />} />
+                    <Route path="/products/:id" element={<DetailesPage />} />
+                    <Route path="/checkout" element={<Checkout />} />
+
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
-            </Layout>
+            </ProductProvider>
         </>
     );
 }
