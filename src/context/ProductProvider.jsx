@@ -27,4 +27,10 @@ function useProducts() {
     return products;
 }
 
-export { useProducts, ProductProvider as default };
+function useProductDetailes(id) {
+    const products = useContext(ProductContext);
+    const result = products.find((i) => i.id == id);
+    return result;
+}
+
+export { useProductDetailes, useProducts, ProductProvider as default };

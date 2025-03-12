@@ -39,4 +39,25 @@ function getInitialQuery(searchParams) {
     return query;
 }
 
-export { shorternText, searchProducts, filterProducts, createQueryObject, getInitialQuery };
+function sumProducts(products) {
+    const itemsCounter = products.reduce((acc, cur) => acc + cur.quantity, 0);
+    const total = +products.reduce((acc, cur) => (acc + cur.price) * cur.quantity, 0).toFixed(2);
+
+    return { total, itemsCounter };
+}
+
+function productQuantity(state, id) {
+    const index = state.selectedItems.findIndex((i) => i.id == id);
+    if (index == -1) return 0;
+    return state.selectedItems[index].quantity;
+}
+
+export {
+    shorternText,
+    searchProducts,
+    filterProducts,
+    createQueryObject,
+    getInitialQuery,
+    sumProducts,
+    productQuantity,
+};
