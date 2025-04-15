@@ -1,0 +1,28 @@
+.footer {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.8em;
+  background-color: black;
+  border: 1px solid #2d2d2d;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  bottom: 1em;
+  border-radius: 20px;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+
+  a {
+    gap: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
+}
