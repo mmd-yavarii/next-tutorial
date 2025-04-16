@@ -1,7 +1,12 @@
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-export default function Explore() {
+function Filter() {
+  const router = useRouter();
+  const { filter } = router.query;
+  const userId = filter?.[1];
+
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const url = 'https://jsonplaceholder.typicode.com/posts';
@@ -9,31 +14,20 @@ export default function Explore() {
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setPosts(json))
+      .then((json) => {
+        const result = json.filter((i) => i.userId == userId);
+        setPosts(result);
+      })
       .catch((error) => alert(error.message))
       .finally(() => setIsLoading(false));
-  }, []);
-
-  const filters = [...new Set(posts.map((i) => i.userId))] ?? [];
+  }, [userId]);
 
   return (
-    <>
-      <h1>Explore</h1>
-      <hr />
-      <br />
-
-      <div>
-        {filters.map((filter) => (
-          <Link key={filter} href={`/explore/filter/${filter}`} style={{ margin: '0.2em', backgroundColor: '#2d2d2d' }}>
-            user {filter}
-          </Link>
-        ))}
-      </div>
-
-      <br />
+    <div>
+      <h1>user {userId} posts</h1>
       <hr />
 
-      {isLoading && <h1>Loading ...</h1>}
+      {isLoading && <h1>Loading...</h1>}
 
       {!!posts.length && (
         <div>
@@ -47,6 +41,8 @@ export default function Explore() {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
+
+export default Filter;
