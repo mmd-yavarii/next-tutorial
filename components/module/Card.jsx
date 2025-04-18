@@ -7,7 +7,7 @@ function Card(props) {
   const { name, id, model, year, distance, location, price, image } = props;
 
   return (
-    <Link href={`cars/${id}`}>
+    <Link href={`/cars/${id}`}>
       <div className={styles.container}>
         <img src={image} className={styles.image} alt={name} />
         <h4 className={styles.title}>{`${name} ${model}`}</h4>
