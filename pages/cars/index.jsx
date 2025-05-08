@@ -1,16 +1,12 @@
-import SearchBar from '@/components/module/SearchBar';
-import CarsPage from '@/components/templates/CarsPage';
-import Categories from '@/components/templates/Categories';
+import CarsList from '@/components/template/CarsList';
 import carsData from '@/data/carsData';
 
-function Details() {
+function cars() {
   return (
     <div>
-      <SearchBar />
-      <Categories />
-      <CarsPage data={carsData} />
+      <CarsList cars={carsData} />
     </div>
   );
 }
 
-export default Details;
+export default cars;

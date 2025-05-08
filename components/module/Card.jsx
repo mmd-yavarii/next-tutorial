@@ -1,24 +1,23 @@
-import styles from './Card.module.css';
-
-import Location from '../icons/Location';
+import styles from '@/styles/Card.module.css';
 import Link from 'next/link';
 
-function Card(props) {
-  const { name, id, model, year, distance, location, price, image } = props;
-
+function Card({ model, image, name, year, distance, location, price, id }) {
   return (
-    <Link href={`/cars/${id}`}>
-      <div className={styles.container}>
-        <img src={image} className={styles.image} alt={name} />
-        <h4 className={styles.title}>{`${name} ${model}`}</h4>
-        <p className={styles.detail}>{`${year}-${distance}km`}</p>
-        <div className={styles.footer}>
-          <p>{`${price}`}</p>
-          <div className={styles.location}>
-            <p>{location}</p>
-            <Location />
-          </div>
-        </div>
+    <Link href={`/cars/${id}`} className={styles.container}>
+      <img src={image} alt={name} />
+
+      <div>
+        <h4>
+          {name} {model}
+        </h4>
+        <p className={styles.info}>
+          <span>{year}</span> / <span>{(+distance).toLocaleString()}Km</span>
+        </p>
+      </div>
+
+      <div className={styles.priceAndLoacation}>
+        <p className={styles.price}>${price.toLocaleString()}</p>
+        <p>{location} </p>
       </div>
     </Link>
   );

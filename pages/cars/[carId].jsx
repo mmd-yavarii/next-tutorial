@@ -1,14 +1,28 @@
-import { useRouter } from 'next/router';
-
 import carsData from '@/data/carsData';
-import CarDetails from '@/components/templates/CarDetails';
 
-function CarDetail() {
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+function CarDetails() {
   const router = useRouter();
-  const { carId } = router.query || '';
-  const carDetais = carsData[carId - 1];
+  const carId = router.query.carId || '';
+  const [car, setCar] = useState({});
 
-  return <CarDetails {...carDetais} />;
+  useEffect(() => {
+    setCar(carsData.find((i) => i.id == carId));
+  }, [carId]);
+
+  if (router.isReady)
+    return (
+      <div>
+        <img src={car.image} alt={car.name} />
+
+        <br />
+        <h3>
+          {car.name} {car.model}
+        </h3>
+      </div>
+    );
 }
 
-export default CarDetail;
+export default CarDetails;
