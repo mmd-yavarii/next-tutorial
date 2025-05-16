@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
 export default function Home() {
-  const router = useRouter();
+  return null;
+}
 
-  useEffect(() => {
-    router.replace('/products');
-  }, []);
-
-  return <></>;
+export async function getServerSideProps() {
+  return {
+    redirect: {
+      destination: '/products',
+      permanent: false,
+    },
+  };
 }
