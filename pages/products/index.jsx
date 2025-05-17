@@ -63,7 +63,7 @@ export default function ProductsList({ products, categories, search = '' }) {
 
       {products.map((i) => (
         <div key={i.id} style={{ padding: '0.5em 1em', borderBottom: '1px solid #ccc', margin: '1em 0' }}>
-          <Link href={``}>{i.title}</Link>
+          <Link href={`/products/${i.id}`}>{i.title}</Link>
           <p>
             $ {i.price} / {i.category}
           </p>
@@ -83,6 +83,11 @@ export async function getServerSideProps(context) {
 
   let products = category ? json.filter((product) => product.category === category) : json;
   products = search ? products.filter((i) => i.title.toLowerCase().includes(search.toLowerCase())) : products;
+
+  // add dynamic page for earch product
+  // redirect to notfound if product nott exist
+
+  console.log(context.cookie);
 
   return {
     props: { products, categories, search },
